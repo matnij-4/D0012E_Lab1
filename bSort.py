@@ -107,11 +107,11 @@ def rndlist(n):
 
 
 print("binMergesort timing:")
-for x in range(1000, 50001, 200):
-    time = timeit.timeit('a = binMergeSort(a, 100)', globals=globals(), setup="a = rndlist(x)", number=5) 
+for x in range(10000, 120000, 100000):
+    time = timeit.timeit('a = binMergeSort(a, 10000)', globals=globals(), setup="a = rndlist(x)", number=5) 
     print(str(x) + "    " + str(time))
 
 print("insMergeSort timing:")
-for x in range(1000, 50001, 200):
-    time = timeit.timeit('a = insMergeSort(a, 100)', globals=globals(), setup="a = rndlist(x)", number=5) 
+for x in range(10000, 120000, 100000):
+    time = timeit.timeit('a = insMergeSort(a, 10000)', globals=globals(), setup="a = rndlist(x)", number=5) 
     print(str(x) + "    " + str(time))

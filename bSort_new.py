@@ -1,6 +1,9 @@
 import time
 import random
 # Help function to find the place for the insert sort function.
+
+
+
 def findPlace(array, value, start, end):
 
     # Base the fist time it just add the number.
@@ -65,7 +68,7 @@ def randomlist(n):
 array = [5,2,3,6,7,8,10,11,9,12,18,19,5677]
 array = randomlist(10000)
 ts = time.time()
-print(bSort(array))
+bSort(array)
 ts = (time.time() - ts)
 print ("It took " + str(ts) + " sec to complete")
 print("\n\n\n")
