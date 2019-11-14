@@ -60,7 +60,6 @@ def insertion_sort_binary(numlist):
                 top = middle
 
         numlist[:] = numlist[:bottom] + [currentvalue] + numlist[bottom:index] + numlist[index + 1:]
-
     return numlist
 
 
