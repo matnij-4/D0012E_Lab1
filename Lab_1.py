@@ -28,7 +28,7 @@ def almostSorted(n):
     return alSort
 
 
-
+#Inplace Insertion_Sort
 def insertion_sort(numlist):
 
     for index in range(1,len(numlist)):
@@ -43,8 +43,6 @@ def insertion_sort(numlist):
         numlist[position]=currentvalue
 
     return numlist
-
-
 
 
 def insertion_sort_binary(numlist):
