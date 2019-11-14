@@ -77,7 +77,7 @@ def insMergeSort(l, k):
     lenght = len(l)
     if lenght <= k:
         return insertsort(l)
-
+    
     al = binMergeSort(l[:lenght // 2  +1], k)
     bl = binMergeSort(l[lenght // 2  +1:], k)
 
@@ -104,14 +104,33 @@ def rndlist(n):
         a.append(random.randint(0, 10000))
     return a
 
+def sortlist(n):
+    a = []
+    for n in range(0,n):
+        a.append(n)
+    return a
 
+bestTime = 200
 
 print("binMergesort timing:")
-for x in range(10000, 120000, 100000):
-    time = timeit.timeit('a = binMergeSort(a, 10000)', globals=globals(), setup="a = rndlist(x)", number=5) 
+for x in range(50, 2000, 50):
+    time = timeit.timeit('a = binMergeSort(a, x)', globals=globals(), setup="a = rndlist(30000)", number=5) 
     print(str(x) + "    " + str(time))
+    if ( bestTime > time):
+        bestTime = time
+        print(time)
+
+print( "This might be the best K " + str(bestTime))
+
+bestTime = 200
 
 print("insMergeSort timing:")
-for x in range(10000, 120000, 100000):
-    time = timeit.timeit('a = insMergeSort(a, 10000)', globals=globals(), setup="a = rndlist(x)", number=5) 
+for x in range(50, 2000, 50):
+    time = timeit.timeit('a = insMergeSort(a, x)', globals=globals(), setup="a = rndlist(30000)", number=5) 
     print(str(x) + "    " + str(time))
+    if ( bestTime > time):
+        bestTime = time
+        print(time)
+
+print( "This might be the best K " + str(bestTime))
+
