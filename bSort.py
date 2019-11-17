@@ -110,27 +110,22 @@ def sortlist(n):
         a.append(n)
     return a
 
-bestTime = 200
+
 
 print("binMergesort timing:")
 for x in range(50, 2000, 50):
     time = timeit.timeit('a = binMergeSort(a, x)', globals=globals(), setup="a = rndlist(30000)", number=5) 
     print(str(x) + "    " + str(time))
-    if ( bestTime > time):
-        bestTime = time
-        print(time)
 
-print( "This might be the best K " + str(bestTime))
 
-bestTime = 200
+
+
 
 print("insMergeSort timing:")
 for x in range(50, 2000, 50):
     time = timeit.timeit('a = insMergeSort(a, x)', globals=globals(), setup="a = rndlist(30000)", number=5) 
     print(str(x) + "    " + str(time))
-    if ( bestTime > time):
-        bestTime = time
-        print(time)
 
-print( "This might be the best K " + str(bestTime))
+
+
 
