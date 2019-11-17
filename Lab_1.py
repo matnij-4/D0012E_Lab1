@@ -14,7 +14,7 @@ def randomList(n):
 # Skappar en Soterad Lista
 def sortedList(n):
     sortedlist = []
-    for x in range(1, 10000, 1):
+    for x in range(1, n+1, 1):
         sortedlist.append(x)
 
     return sortedlist
@@ -24,7 +24,7 @@ def sortedList(n):
 # Skappar en nästan soterad lista.
 def almostSorted(n):
     alSort = []
-    for x in range(1, 10000, 1):
+    for x in range(1, n+1, 1):
         alSort.append(x)
     return alSort
 
@@ -141,23 +141,18 @@ x = 4096
 for i in range(1, 7, 1):
     a = sortedList(x)
 
-    
     timestp = time.time()
-    binMergeSort(a,16)
+    binMergeSort(a,64)
     print(str(x) + "    " + str(time.time()-timestp) + "   Merge Binary")
 
-
     timestp = time.time()
-    insMergeSort(a,16)
+    insMergeSort(a,64)
     print(str(x) + "    " + str(time.time()-timestp) + "   Merge Insert")
-
 
     timestp = time.time()
     merge_sort(a)
     print(str(x) + "    " + str(time.time()-timestp) + "   Merge ")
 
-
-    
     x = x*2
 
 #print("insMergeSort timing:")
