@@ -136,11 +136,10 @@ def merge_sort(numlist):
     
     return numlist
 
+
 # Kör testerna av algoritmerna.
 x = 4096
 
-
-print(merge_sort(randomList(100)))
 #print("binMergesort timing:")
 for i in range(1, 7, 1):
     a = sortedList(x)
