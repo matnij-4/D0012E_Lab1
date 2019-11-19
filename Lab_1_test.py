@@ -105,10 +105,6 @@ def merge_sort_insert(numlist, minlength):
 
 def merge_sort_binary(numlist, minlength):
 
-    """ Den variant av mergesort som delar upp listan tills sublistorna når ett satt värde (length) eller mindre, kör
-    binary insertionsort på varje sublista och sedan använder sätter ihop dem som mergsort vanligtvis gör.
-    """
-
     if len(numlist)>minlength:
 
         middle = len(numlist) // 2
@@ -144,9 +140,10 @@ def merge_sort_binary(numlist, minlength):
 
 
 
-
+#Merge Sort
 def merge_sort(numlist):
 
+    # Delar listan i hälften tills 
     if(len(numlist) > 1):
 
         middle = len(numlist) // 2
@@ -180,25 +177,25 @@ def merge_sort(numlist):
 
 
 # Kör testerna av algoritmerna.
-x = 4096
+x = 2
 
 #print("binMergesort timing:")
-for i in range(1, 10, 1):
-    a = randomList(x)
-    b = a
-    c= a
+for i in range(1, 14, 1):
+    a = randomList(262144)
+    b = a.copy()
+    c = a.copy()
 
     timestp = time.time()
-    merge_sort_binary(a,64)
-    print(str(x) + "    " + str(time.time()-timestp) + "   Merge Binary")
-
-    timestp = time.time()
-    merge_sort_insert(b,64)
+    merge_sort_insert(b,128)
     print(str(x) + "    " + str(time.time()-timestp) + "   Merge Insert")
 
     timestp = time.time()
-    merge_sort(c)
-    print(str(x) + "    " + str(time.time()-timestp) + "   Merge ")
+    merge_sort_binary(a,128)
+    print(str(x) + "    " + str(time.time()-timestp) + "   Merge Binary")
+
+#    timestp = time.time()
+#    merge_sort(c)
+#    print(str(x) + "    " + str(time.time()-timestp) + "   Merge ")
 
     x = x*2
 
