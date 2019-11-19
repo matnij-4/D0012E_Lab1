@@ -24,8 +24,15 @@ def sortedList(n):
 # Skappar en nästan soterad lista.
 def almostSorted(n):
     alSort = []
+    flag = True
     for x in range(1, n+1, 1):
-        alSort.append(x)
+        if flag:
+            alSort.append(x-1)
+            
+            flag = False
+        else:
+            alSort.append(x+1)
+            flag = True
     return alSort
 
 
@@ -60,15 +67,19 @@ def insertion_sort_binary(numlist):
             else:
                 top = middle
 
-        numlist[:] = numlist[:bottom] + [currentvalue] + numlist[bottom:index] + numlist[index + 1:]
+
+#        numlist[:] = numlist[:bottom] + [currentvalue] + numlist[bottom:index] + numlist[index + 1:]
+
+        for i in range(index, bottom, -1):
+            numlist[i] = numlist[i - 1]
+
+        numlist[bottom] = currentvalue
+        
     return numlist
 
 
 def merge_sort_insert(numlist, minlength):
 
-    """ Den variant av mergesort som delar upp listan tills sublistorna når ett satt värde (minlength) eller mindre, kör
-    insertionsort på varje sublista och sedan använder sätter ihop dem som mergsort vanligtvis gör.
-    """
 
     if len(numlist)>minlength:
 
@@ -102,6 +113,9 @@ def merge_sort_insert(numlist, minlength):
         insertion_sort(numlist)
 
     return numlist
+
+
+
 
 def merge_sort_binary(numlist, minlength):
 
@@ -143,7 +157,7 @@ def merge_sort_binary(numlist, minlength):
 #Merge Sort
 def merge_sort(numlist):
 
-    # Delar listan i hälften tills 
+    # Delar listan i hälften tills bara ett elemnt i listan
     if(len(numlist) > 1):
 
         middle = len(numlist) // 2
@@ -176,26 +190,35 @@ def merge_sort(numlist):
     return numlist
 
 
+def isSorted(a):
+    last = a[0]
+    for x in a[1:]:
+        if x < last:
+            return False
+        last = x
+
+    return True
+
 # Kör testerna av algoritmerna.
-x = 2
+x = 4096
 
 #print("binMergesort timing:")
-for i in range(1, 14, 1):
-    a = randomList(262144)
+for i in range(1, 11, 1):
+    a = randomList(x)
     b = a.copy()
     c = a.copy()
 
     timestp = time.time()
-    merge_sort_insert(b,128)
+    merge_sort_binary(a,32)
+    print(str(x) + "    " + str(time.time()-timestp) + "   Merge Binary")
+
+    timestp = time.time()
+    merge_sort_insert(b,32)
     print(str(x) + "    " + str(time.time()-timestp) + "   Merge Insert")
 
     timestp = time.time()
-    merge_sort_binary(a,128)
-    print(str(x) + "    " + str(time.time()-timestp) + "   Merge Binary")
-
-#    timestp = time.time()
-#    merge_sort(c)
-#    print(str(x) + "    " + str(time.time()-timestp) + "   Merge ")
+    merge_sort(c)
+    print(str(x) + "    " + str(time.time()-timestp) + "   Merge ")
 
     x = x*2
 
