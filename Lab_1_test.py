@@ -64,42 +64,84 @@ def insertion_sort_binary(numlist):
     return numlist
 
 
-def merge(al, bl):
-    cl = []
-    while len(al) > 0 and len(bl) > 0:
-        if al[0] < bl[0]:
-            cl.append(al[0])
-            al = al[1:]
-        else:
-            cl.append(bl[0])
-            bl = bl[1:]
+def merge_sort_insert(numlist, minlength):
 
-    if len(bl) > 0:
-        cl += bl
+    """ Den variant av mergesort som delar upp listan tills sublistorna når ett satt värde (minlength) eller mindre, kör
+    insertionsort på varje sublista och sedan använder sätter ihop dem som mergsort vanligtvis gör.
+    """
+
+    if len(numlist)>minlength:
+
+        middle = len(numlist) // 2
+        lefthalf, righthalf = numlist[:middle], numlist[middle:]
+
+        merge_sort_insert(lefthalf, minlength)
+        merge_sort_insert(righthalf, minlength)
+
+        i, j, k = 0, 0, 0
+
+        while i < len(lefthalf) and j < len(righthalf):
+            if lefthalf[i] < righthalf[j]:
+                numlist[k]=lefthalf[i]
+                i=i+1
+            else:
+                numlist[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+        while i < len(lefthalf):
+            numlist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j < len(righthalf):
+            numlist[k]=righthalf[j]
+            j=j+1
+            k=k+1
     else:
-        cl += al
+        insertion_sort(numlist)
 
-    return cl
+    return numlist
 
-def binMergeSort(l, k):
-    lenght = len(l)
-    if lenght <= k:
-        return insertion_sort_binary(l)
+def merge_sort_binary(numlist, minlength):
 
-    al = binMergeSort(l[:lenght // 2  +1], k)
-    bl = binMergeSort(l[lenght // 2  +1:], k)
+    """ Den variant av mergesort som delar upp listan tills sublistorna når ett satt värde (length) eller mindre, kör
+    binary insertionsort på varje sublista och sedan använder sätter ihop dem som mergsort vanligtvis gör.
+    """
 
-    return merge(al, bl)
+    if len(numlist)>minlength:
 
-def insMergeSort(l, k):
-    lenght = len(l)
-    if lenght <= k:
-        return insertion_sort(l)
-    
-    al = insMergeSort(l[:lenght // 2  +1], k)
-    bl = insMergeSort(l[lenght // 2  +1:], k)
+        middle = len(numlist) // 2
+        lefthalf, righthalf = numlist[:middle], numlist[middle:]
 
-    return merge(al, bl)
+        merge_sort_binary(lefthalf, minlength)
+        merge_sort_binary(righthalf, minlength)
+
+        i, j, k = 0, 0, 0
+
+        while i < len(lefthalf) and j < len(righthalf):
+            if lefthalf[i] < righthalf[j]:
+                numlist[k]=lefthalf[i]
+                i=i+1
+            else:
+                numlist[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+        while i < len(lefthalf):
+            numlist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j < len(righthalf):
+            numlist[k]=righthalf[j]
+            j=j+1
+            k=k+1
+    else:
+        insertion_sort_binary(numlist)
+
+    return numlist
+
 
 
 
@@ -141,19 +183,21 @@ def merge_sort(numlist):
 x = 4096
 
 #print("binMergesort timing:")
-for i in range(1, 7, 1):
-    a = sortedList(x)
+for i in range(1, 10, 1):
+    a = randomList(x)
+    b = a
+    c= a
 
     timestp = time.time()
-    binMergeSort(a,2)
+    merge_sort_binary(a,64)
     print(str(x) + "    " + str(time.time()-timestp) + "   Merge Binary")
 
     timestp = time.time()
-    insMergeSort(a,2)
+    merge_sort_insert(b,64)
     print(str(x) + "    " + str(time.time()-timestp) + "   Merge Insert")
 
     timestp = time.time()
-    merge_sort(a)
+    merge_sort(c)
     print(str(x) + "    " + str(time.time()-timestp) + "   Merge ")
 
     x = x*2
