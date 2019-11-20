@@ -6,10 +6,16 @@ import timeit
 
 # skappar en osoterad lista.
 def randomList(n):
+    randomlist = []
+    for x in range(1, n+1, 1):
+        randomlist.append(random.randint(1,10000))
+        
 
-    return [random.randint(1,10000) for _ in range(n)]
+    return randomlist
 
+#    return [random.randint(1,10000) for _ in range(n)]
 
+print(randomList(10))
 
 # Skappar en Soterad Lista
 def sortedList(n):
@@ -35,15 +41,27 @@ def almostSorted(n):
             flag = True
     return alSort
 
+# Skappar en lista med allt fel.
+def worstList(n):
+    worstSorted = []
+    for x in range(n, 0, -1):
+        worstSorted.append(x)
+    return worstSorted
+
+
+        
+
 
 #Inplace Insertion_Sort
 def insertion_sort(numlist):
 
+    #Går igenom listan n gånger
     for index in range(1,len(numlist)):
 
         currentvalue = numlist[index]
         position = index
 
+        # Hitta platsen för den värde. (SWAP)
         while position>0 and numlist[position-1]>currentvalue:
             numlist[position]=numlist[position-1]
             position = position-1
@@ -53,8 +71,10 @@ def insertion_sort(numlist):
     return numlist
 
 
+
 def insertion_sort_binary(numlist):
 
+    #Går igenom listan n gånger
     for index in range(1, len(numlist)):
 
         currentvalue = numlist[index]
@@ -67,9 +87,8 @@ def insertion_sort_binary(numlist):
             else:
                 top = middle
 
-
-#        numlist[:] = numlist[:bottom] + [currentvalue] + numlist[bottom:index] + numlist[index + 1:]
-
+                
+        #Flyttar listan och siffran till rätt plats.
         for i in range(index, bottom, -1):
             numlist[i] = numlist[i - 1]
 
@@ -80,7 +99,7 @@ def insertion_sort_binary(numlist):
 
 def merge_sort_insert(numlist, minlength):
 
-
+    #Delar upp listan tills den är rätt Storlek.
     if len(numlist)>minlength:
 
         middle = len(numlist) // 2
@@ -91,6 +110,8 @@ def merge_sort_insert(numlist, minlength):
 
         i, j, k = 0, 0, 0
 
+
+        # Merge alla sublistor.
         while i < len(lefthalf) and j < len(righthalf):
             if lefthalf[i] < righthalf[j]:
                 numlist[k]=lefthalf[i]
@@ -109,6 +130,7 @@ def merge_sort_insert(numlist, minlength):
             numlist[k]=righthalf[j]
             j=j+1
             k=k+1
+    #När den är rätt storlekt så soterar man sub listorna.
     else:
         insertion_sort(numlist)
 
@@ -119,6 +141,7 @@ def merge_sort_insert(numlist, minlength):
 
 def merge_sort_binary(numlist, minlength):
 
+    #Delar upp listan tills den är rätt Storlek.
     if len(numlist)>minlength:
 
         middle = len(numlist) // 2
@@ -129,6 +152,7 @@ def merge_sort_binary(numlist, minlength):
 
         i, j, k = 0, 0, 0
 
+        #Merge alla sublistor.
         while i < len(lefthalf) and j < len(righthalf):
             if lefthalf[i] < righthalf[j]:
                 numlist[k]=lefthalf[i]
@@ -147,6 +171,8 @@ def merge_sort_binary(numlist, minlength):
             numlist[k]=righthalf[j]
             j=j+1
             k=k+1
+            
+    #När den är rätt storlekt så soterar man sub listorna.
     else:
         insertion_sort_binary(numlist)
 
@@ -168,6 +194,8 @@ def merge_sort(numlist):
 
         i, j, k = 0, 0, 0
 
+        
+        # Merge allt till listorna.
         while i < len(lefthalf) and j < len(righthalf):
             if lefthalf[i] < righthalf[j]:
                 numlist[k]=lefthalf[i]
@@ -190,6 +218,7 @@ def merge_sort(numlist):
     return numlist
 
 
+# Testar listor
 def isSorted(a):
     last = a[0]
     for x in a[1:]:
@@ -204,7 +233,7 @@ x = 4096
 
 #print("binMergesort timing:")
 for i in range(1, 11, 1):
-    a = randomList(x)
+    a = sortedList(x)
     b = a.copy()
     c = a.copy()
 
